@@ -14,6 +14,7 @@ namespace ConsoleAppClient
     {
 
         static HttpClient client = new HttpClient();
+
         static LoginInfo login = new LoginInfo();
 
         static List<Survey> objs = new List<Survey>();
@@ -27,6 +28,10 @@ namespace ConsoleAppClient
             Console.WriteLine("Hello World!");
             userLogin();
             GetSurveys();
+            PrintSurveys();
+            SelectSurvey();
+            AnswerQuestions();
+            SendAnswers();
         }
         
         static void userLogin()
@@ -62,14 +67,6 @@ namespace ConsoleAppClient
             objs = JsonConvert.DeserializeObject<List<Survey>>(responseBody);
 
             Console.WriteLine("huehuehue");
-
-            PrintSurveys();
-
-            SelectSurvey();
-
-            AnswerQuestions();
-
-            SendAnswers();
 
         }
 
@@ -120,7 +117,7 @@ namespace ConsoleAppClient
         static void SendAnswers()
         {
             string answersUrl = "https://localhost:44315/api/answers";
-            Answers newAnswers = new Answers() { PersonId = 1, SurveyId = selectedSurvey.id, responses = answers };
+            Answers newAnswers = new Answers() { PersonId = login.Username, SurveyId = selectedSurvey.id, responses = answers };
             HttpResponseMessage response2 = client.PostAsJsonAsync(new Uri(answersUrl), newAnswers).Result;
         }
 

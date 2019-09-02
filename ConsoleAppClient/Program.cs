@@ -50,11 +50,12 @@ namespace ConsoleAppClient
 
             string loginUrl = "https://localhost:44315/api/login";
 
-            HttpResponseMessage response2 = client.PostAsJsonAsync(new Uri(loginUrl), login).Result;
-
-            HttpResponseMessage response = client.GetAsync(new Uri(loginUrl)).Result;
+            HttpResponseMessage response = client.PostAsJsonAsync(new Uri(loginUrl), login).Result;
 
             string responseBody = response.Content.ReadAsStringAsync().Result;
+
+            login = JsonConvert.DeserializeObject<LoginInfo>(responseBody);
+
             Console.WriteLine(responseBody);
         }
 
@@ -116,9 +117,10 @@ namespace ConsoleAppClient
 
         static void SendAnswers()
         {
-            string answersUrl = "https://localhost:44315/api/answers";
-            Answers newAnswers = new Answers() { PersonId = login.Username, SurveyId = selectedSurvey.id, responses = answers };
-            HttpResponseMessage response2 = client.PostAsJsonAsync(new Uri(answersUrl), newAnswers).Result;
+            string answersUrl = "https://localhost:44315/api/login";
+            Answers newAnswers = new Answers() { SurveyId = selectedSurvey.id, responses = answers };
+            login.Responses.Add(newAnswers);
+            HttpResponseMessage response2 = client.PutAsJsonAsync(new Uri(answersUrl), login).Result;
         }
 
     }

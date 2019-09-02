@@ -85,7 +85,21 @@ namespace ConsoleAppClient
 
             string entree = Console.ReadLine();
 
-            selectedSurvey = objs.Find(p => p.id.ToString() == entree);
+            int number;
+            Int32.TryParse(entree, out number);
+
+            if (login.Responses.FindIndex(p => p.SurveyId == number) < 0)
+                selectedSurvey = objs.Find(p => p.id.ToString() == entree);
+                if (selectedSurvey == null)
+                {
+                    Console.WriteLine("Survey doesn't exist");
+                    SelectSurvey();
+                }
+            else
+            {
+                Console.WriteLine("Survey already completed");
+                SelectSurvey();
+            }
 
         }
 

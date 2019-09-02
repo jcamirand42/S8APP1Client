@@ -42,6 +42,8 @@ namespace ConsoleAppClient
 
             AnswerQuestions();
 
+            SendAnswers();
+
         }
 
         static void PrintSurveys()
@@ -79,16 +81,20 @@ namespace ConsoleAppClient
         {
             string entry = Console.ReadLine();
             entry = entry.ToLower();
-            if (!choices.ContainsKey(entry))
+            while (!choices.ContainsKey(entry))
             {
-                do
-                {
-                    Console.WriteLine("choix invalide");
-                    entry = Console.ReadLine();
-                    entry = entry.ToLower();
-                } while (!choices.ContainsKey(entry));
+                Console.WriteLine("choix invalide");
+                entry = Console.ReadLine();
+                entry = entry.ToLower();
             }
             answers.Add(entry);
+        }
+
+        static void SendAnswers()
+        {
+            string answersUrl = "https://localhost:44315/api/answers";
+            Answers newAnswers = new Answers() { PersonId = 1, SurveyId = selectedSurvey.id, responses = answers };
+            HttpResponseMessage response2 = client.PostAsJsonAsync(new Uri(answersUrl), newAnswers).Result;
         }
 
     }

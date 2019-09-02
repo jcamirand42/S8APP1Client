@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-
 namespace ConsoleAppClient
 {
 
@@ -14,6 +13,7 @@ namespace ConsoleAppClient
     {
 
         static HttpClient client = new HttpClient();
+        
 
         static LoginInfo login = new LoginInfo();
 
@@ -50,13 +50,23 @@ namespace ConsoleAppClient
 
             string loginUrl = "https://localhost:44315/api/login";
 
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("apikey");
+
             HttpResponseMessage response = client.PostAsJsonAsync(new Uri(loginUrl), login).Result;
 
-            string responseBody = response.Content.ReadAsStringAsync().Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string responseString = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(responseString);
+                Console.WriteLine("HTTP Status: {0}, Reason {1}. Press ENTER to exit", response.StatusCode, response.ReasonPhrase);
+                login = JsonConvert.DeserializeObject<LoginInfo>(responseString);
+                Console.WriteLine(responseString);
+            }
+            else
+            {
+                Console.WriteLine("Failed to call the API. HTTP Status: {0}, Reason {1}", response.StatusCode, response.ReasonPhrase);
+            }
 
-            login = JsonConvert.DeserializeObject<LoginInfo>(responseBody);
-
-            Console.WriteLine(responseBody);
         }
 
         static void GetSurveys()

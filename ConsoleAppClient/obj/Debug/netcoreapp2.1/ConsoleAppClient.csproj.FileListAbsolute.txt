@@ -9,3 +9,14 @@ C:\Users\jcami\source\repos\APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\
 C:\Users\jcami\source\repos\APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.pdb
 C:\Users\jcami\source\repos\APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.dll
 C:\Users\jcami\source\repos\APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.pdb
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.deps.json
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.runtimeconfig.json
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.runtimeconfig.dev.json
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.dll
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.pdb
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.csprojAssemblyReference.cache
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.csproj.CoreCompileInputs.cache
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.AssemblyInfoInputs.cache
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.AssemblyInfo.cs
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.dll
+C:\Users\jcami\source\repos\jcamirand42\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.pdb

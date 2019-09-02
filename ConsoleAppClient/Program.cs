@@ -13,8 +13,8 @@ namespace ConsoleAppClient
     {
 
         static HttpClient client = new HttpClient();
-        
 
+        static LoginInfo tempLog = new LoginInfo();
         static LoginInfo login = new LoginInfo();
 
         static List<Survey> objs = new List<Survey>();
@@ -26,6 +26,7 @@ namespace ConsoleAppClient
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            getAPIAuthorization();
             userLogin();
             GetSurveys();
             PrintSurveys();
@@ -34,37 +35,62 @@ namespace ConsoleAppClient
             SendAnswers();
         }
         
+        static void getAPIAuthorization()
+        {
+            
+            //Verification de la clef d'autorisation
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("apikey");
+
+            // Test de l'autorisation
+            /*string baseUrl = "https://localhost:44315/api/login";
+            HttpResponseMessage response = client.GetAsync(new Uri(baseUrl)).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("HTTP Status: {0}, Reason {1}. Press ENTER to exit", response.StatusCode, response.ReasonPhrase);
+            }
+            else
+            {
+                APIKeyNotValid(response);
+            }*/
+        }
+
         static void userLogin()
         {
-            Console.WriteLine("Enter your username:");
+            Console.WriteLine("Nom d'utilisateur: ");
 
             string username = Console.ReadLine();
 
-            Console.WriteLine("Enter your password:");
+            Console.WriteLine("Mot de passe: ");
 
             string password = Console.ReadLine();
 
+            LoginInfo log = new LoginInfo();
+
             // Create a new product
-            login.Username = username;
-            login.Password = password;
+            tempLog.Username = username;
+            tempLog.Password = password;
 
             string loginUrl = "https://localhost:44315/api/login";
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("apikey");
-
-            HttpResponseMessage response = client.PostAsJsonAsync(new Uri(loginUrl), login).Result;
+            HttpResponseMessage response = client.PostAsJsonAsync(new Uri(loginUrl), tempLog).Result;
+            string test = response.StatusCode.ToString();
 
             if (response.IsSuccessStatusCode)
             {
                 string responseString = response.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(responseString);
-                Console.WriteLine("HTTP Status: {0}, Reason {1}. Press ENTER to exit", response.StatusCode, response.ReasonPhrase);
                 login = JsonConvert.DeserializeObject<LoginInfo>(responseString);
-                Console.WriteLine(responseString);
+                //login = tempLog;
+                
+            }
+            else if (response.StatusCode.ToString() == "NotFound")
+            {
+                Console.WriteLine("Votre nom d'utilisateur ou votre mot de passe n'est pas valide");
+                userLogin();
             }
             else
             {
-                Console.WriteLine("Failed to call the API. HTTP Status: {0}, Reason {1}", response.StatusCode, response.ReasonPhrase);
+                APIKeyNotValid(response);
             }
 
         }
@@ -73,12 +99,16 @@ namespace ConsoleAppClient
         {
             HttpResponseMessage response = client.GetAsync(new Uri("https://localhost:44315/api/survey")).Result;
 
-            string responseBody = response.Content.ReadAsStringAsync().Result;
+            if (response.IsSuccessStatusCode)
+            { 
+                string responseBody = response.Content.ReadAsStringAsync().Result;
+                objs = JsonConvert.DeserializeObject<List<Survey>>(responseBody);
 
-            objs = JsonConvert.DeserializeObject<List<Survey>>(responseBody);
-
-            Console.WriteLine("huehuehue");
-
+            }
+            else
+            {
+                APIKeyNotValid(response);
+            }
         }
 
         static void PrintSurveys()
@@ -91,23 +121,30 @@ namespace ConsoleAppClient
 
         static void SelectSurvey()
         {
-            Console.WriteLine("Enter survey id to start");
+            Console.WriteLine("Veuiller entrer l'identifiant de votre sondage (1 ou 2)");
 
             string entree = Console.ReadLine();
 
             int number;
             Int32.TryParse(entree, out number);
 
+            if (login.Responses == null)
+            {
+                login.Responses = new List<Answers>();
+            }
+
             if (login.Responses.FindIndex(p => p.SurveyId == number) < 0)
+            { 
                 selectedSurvey = objs.Find(p => p.id.ToString() == entree);
                 if (selectedSurvey == null)
                 {
-                    Console.WriteLine("Survey doesn't exist");
+                    Console.WriteLine("Ce sondage est inexistant");
                     SelectSurvey();
                 }
+            }
             else
             {
-                Console.WriteLine("Survey already completed");
+                Console.WriteLine("Vous avez déjà compléter ce sondage");
                 SelectSurvey();
             }
 
@@ -132,7 +169,7 @@ namespace ConsoleAppClient
             entry = entry.ToLower();
             while (!choices.ContainsKey(entry))
             {
-                Console.WriteLine("choix invalide");
+                Console.WriteLine("Choix invalide");
                 entry = Console.ReadLine();
                 entry = entry.ToLower();
             }
@@ -144,7 +181,17 @@ namespace ConsoleAppClient
             string answersUrl = "https://localhost:44315/api/login";
             Answers newAnswers = new Answers() { SurveyId = selectedSurvey.id, responses = answers };
             login.Responses.Add(newAnswers);
-            HttpResponseMessage response2 = client.PutAsJsonAsync(new Uri(answersUrl), login).Result;
+            HttpResponseMessage response = client.PutAsJsonAsync(new Uri(answersUrl), login).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                APIKeyNotValid(response);
+            }
+        }
+
+        static void APIKeyNotValid(HttpResponseMessage response)
+        {           
+            Console.WriteLine("Échec de la connexion avec l'API... HTTP Status: {0}, Reason {1}", response.StatusCode, response.ReasonPhrase);
+            Environment.Exit(0);            
         }
 
     }

@@ -9,3 +9,14 @@ C:\Users\jcami\source\repos\APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\
 C:\Users\jcami\source\repos\APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.pdb
 C:\Users\jcami\source\repos\APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.dll
 C:\Users\jcami\source\repos\APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.pdb
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.deps.json
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.runtimeconfig.json
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.runtimeconfig.dev.json
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.dll
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\bin\Debug\netcoreapp2.1\ConsoleAppClient.pdb
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.csprojAssemblyReference.cache
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.csproj.CoreCompileInputs.cache
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.AssemblyInfoInputs.cache
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.AssemblyInfo.cs
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.dll
+C:\Users\marie\OneDrive\Documents\S8APP1Client\ConsoleAppClient\obj\Debug\netcoreapp2.1\ConsoleAppClient.pdb

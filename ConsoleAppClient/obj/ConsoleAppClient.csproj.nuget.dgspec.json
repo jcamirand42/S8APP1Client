@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jcami\\source\\repos\\APP1Client\\ConsoleAppClient\\ConsoleAppClient.csproj": {}
+    "C:\\Users\\marie\\OneDrive\\Documents\\S8APP1Client\\ConsoleAppClient\\ConsoleAppClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jcami\\source\\repos\\APP1Client\\ConsoleAppClient\\ConsoleAppClient.csproj": {
+    "C:\\Users\\marie\\OneDrive\\Documents\\S8APP1Client\\ConsoleAppClient\\ConsoleAppClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jcami\\source\\repos\\APP1Client\\ConsoleAppClient\\ConsoleAppClient.csproj",
+        "projectUniqueName": "C:\\Users\\marie\\OneDrive\\Documents\\S8APP1Client\\ConsoleAppClient\\ConsoleAppClient.csproj",
         "projectName": "ConsoleAppClient",
-        "projectPath": "C:\\Users\\jcami\\source\\repos\\APP1Client\\ConsoleAppClient\\ConsoleAppClient.csproj",
-        "packagesPath": "C:\\Users\\jcami\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jcami\\source\\repos\\APP1Client\\ConsoleAppClient\\obj\\",
+        "projectPath": "C:\\Users\\marie\\OneDrive\\Documents\\S8APP1Client\\ConsoleAppClient\\ConsoleAppClient.csproj",
+        "packagesPath": "C:\\Users\\marie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marie\\OneDrive\\Documents\\S8APP1Client\\ConsoleAppClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\jcami\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\marie\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -25,7 +25,7 @@ namespace ConsoleAppClient
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Bienvenue a notre sondage!");
             userLogin();
             GetSurveys();
             PrintSurveys();
@@ -34,33 +34,24 @@ namespace ConsoleAppClient
             SendAnswers();
         }
         
-        static void getAPIAuthorization()
-        {
-            
+        static void getAPIAuthorization(string digest)
+        {            
             //Verification de la clef d'autorisation
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("apikey");
+        }
 
-            // Test de l'autorisation
-            /*string baseUrl = "https://localhost:44315/api/login";
-            HttpResponseMessage response = client.GetAsync(new Uri(baseUrl)).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                Console.WriteLine("HTTP Status: {0}, Reason {1}. Press ENTER to exit", response.StatusCode, response.ReasonPhrase);
-            }
-            else
-            {
-                APIKeyNotValid(response);
-            }*/
+        static void getAPIAuthentification(string digest)
+        {
+            //Vérification du login
+            client.DefaultRequestHeaders.Add("Login", digest);
         }
 
         static void userLogin()
         {
             Console.WriteLine("Nom d'utilisateur: ");
-
             string username = Console.ReadLine();
 
             Console.WriteLine("Mot de passe: ");
-
             string password = Console.ReadLine();
 
             LoginInfo log = new LoginInfo();
@@ -71,28 +62,37 @@ namespace ConsoleAppClient
 
             string loginUrl = "https://localhost:44315/api/login";
 
-            HttpResponseMessage response = client.PostAsJsonAsync(new Uri(loginUrl), tempLog).Result;
-            string test = response.StatusCode.ToString();
+            string cryptUser = Base64Encode(tempLog.Username);
+            string cryptPass = Base64Encode(tempLog.Password);
+            getAPIAuthentification(cryptUser + ":" + cryptPass);
+            int codeErreur = 0;
+
+            HttpResponseMessage response = client.PostAsJsonAsync(new Uri(loginUrl), codeErreur).Result;
 
             if (response.IsSuccessStatusCode)
             {
                 string responseString = response.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(responseString);
-                login = JsonConvert.DeserializeObject<LoginInfo>(responseString);
-                getAPIAuthorization();
-                //login = tempLog;
-
+                login = JsonConvert.DeserializeObject<LoginInfo>(responseString);          
+                getAPIAuthorization(cryptUser + ":" + cryptPass);
             }
+
             else if (response.StatusCode.ToString() == "NotFound")
             {
                 Console.WriteLine("Votre nom d'utilisateur ou votre mot de passe n'est pas valide");
+                client.DefaultRequestHeaders.Remove("Login");
                 userLogin();
             }
             else
             {
                 APIKeyNotValid(response);
             }
+        }
 
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
         }
 
         static void GetSurveys()

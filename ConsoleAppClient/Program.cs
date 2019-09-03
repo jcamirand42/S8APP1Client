@@ -26,7 +26,6 @@ namespace ConsoleAppClient
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            getAPIAuthorization();
             userLogin();
             GetSurveys();
             PrintSurveys();
@@ -80,8 +79,9 @@ namespace ConsoleAppClient
                 string responseString = response.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(responseString);
                 login = JsonConvert.DeserializeObject<LoginInfo>(responseString);
+                getAPIAuthorization();
                 //login = tempLog;
-                
+
             }
             else if (response.StatusCode.ToString() == "NotFound")
             {

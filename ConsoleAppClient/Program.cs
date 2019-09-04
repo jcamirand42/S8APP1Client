@@ -72,7 +72,7 @@ namespace ConsoleAppClient
             if (response.IsSuccessStatusCode)
             {
                 string responseString = response.Content.ReadAsStringAsync().Result;
-                Console.WriteLine(responseString);
+                // Console.WriteLine(responseString);
                 login = JsonConvert.DeserializeObject<LoginInfo>(responseString);          
                 getAPIAuthorization(cryptUser + ":" + cryptPass);
             }
